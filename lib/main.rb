@@ -1,6 +1,23 @@
 #!/usr/bin/ruby
+require 'pry-byebug'
+require_relative 'display.rb'
 
 class Hangman
+  include Display
+  attr_reader :turns_remaining, :mystery_word
+  attr_reader :guessed_letters, :dash_row
+
+  def initialize
+    @turns_remaining = 6
+    @mystery_word = fetch_word
+    @guessed_letters = []
+    @dash_row = Array.new(mystery_word.length) {' _ '}
+  end
+
+  def fetch_word
+    File.open('words.txt', 'r').readlines[rand(61000)].split('')[0..-2]
+  end
+
   def open
     display_main_menu
     choose_mode
@@ -24,26 +41,19 @@ class Hangman
   end
 
   def play_game
-    clear_screen
-    puts 'yeah'
+    binding.pry
+    while turns_remaining > 0
+      print turns_remaining
+      turns_remaining -= 6
+    end
   end
+
 
   def saved_games?
     pwd = Dir.pwd
     !Dir.empty?('saved_games')
   end
 
-  def display_main_menu
-    clear_screen
-    print "\n Hello and Welcome to Hangman\n" +
-          "\n 1) New Game\n" +
-          " 2) Load Game\n\n" +
-          " "
-  end
-
-  def clear_screen
-    system('clear') || system('cls')
-  end
 end
 
 Hangman.new.open
