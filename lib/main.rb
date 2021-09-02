@@ -41,11 +41,42 @@ class Hangman
   end
 
   def play_game
-    binding.pry
     while turns_remaining > 0
-      print turns_remaining
-      turns_remaining -= 6
+      clear_display
+      display_game_screen
+      guess = gets.chomp
+      save_game if guess == 'S'
+      if valid?(guess)
+        if mystery_word.include?(guess) && !guessed_letters.include?(guess)
+          replace_dash_with_letter(guess) 
+        else
+          @turns_remaining -= 1 unless guessed_letters.include?(guess)
+        end
+        update_guessed_letters(guess)
+      else
+        next
+      end
+      display_win_screen if dash_row == mystery_word
     end
+    display_lose_screen
+  end
+
+  def update_guessed_letters(guess)
+    guessed_letters.push(guess) unless guessed_letters.include?(guess)
+  end
+
+
+  def replace_dash_with_letter(guess)
+    letter_index_in_mystery_word = mystery_word.each_index.select {|i| mystery_word[i] == guess}
+    guess = ' ' + guess + ' '
+    letter_index_in_mystery_word.each do |i|
+      dash_row.insert(i, guess)
+      dash_row.slice!(i + 1)
+    end
+  end
+
+  def valid?(guess)
+    guess.length == 1 && guess.match(/[a-z]/)
   end
 
 

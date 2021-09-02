@@ -10,18 +10,44 @@ module Display
   end
 
   def display_game_screen
-display_save_instruction
+    display_save_instruction
     display_turns_remaining
     display_dash_row
+    display_guessed_letters
     display_prompt_for_input
   end
 
+  def display_lose_screen
+    clear_display
+    print "\n Sorry, you lose\n\n"
+    display_dash_row
+    display_guessed_letters
+    print "\n The mystery word was:  "
+    print mystery_word.join
+    print "\n"
+  end
+
+  def display_win_screen
+    clear_display
+    print "\n Hurray, you have won\n\n"
+    display_dash_row
+    display_guessed_letters
+    print "\n"
+  end
+
+  def display_guessed_letters
+    print "\n Letters already guessed:"
+    guessed_letters.each {|i| print ' ', i, ' '}
+    print "\n"
+  end
+
   def display_prompt_for_input
-    print " please enter your guess: "
+    print "\n please enter your guess: "
   end
 
   def display_dash_row
-    dash_row.each {|dash| print dash}
+    print ' '
+    dash_row.each { |dash| print dash }
     print "\n"
   end
 
@@ -36,6 +62,4 @@ display_save_instruction
   def clear_display
     system('clear') || system('cls')
   end
-
 end
-
