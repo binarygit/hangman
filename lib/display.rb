@@ -17,6 +17,18 @@ module Display
     display_prompt_for_input
   end
 
+  def display_save_game_screen
+    clear_display
+    print " Save Game\n\n"
+    print " Your Saved Games:\n"
+    if Dir.empty?('saved_games') 
+      print " No saved Games"
+    else
+    Dir.children('saved_games').each_with_index {|dir, index| puts ' ', "#{index}) #{dir}"}
+    end
+    print " Enter a filename, to save your game in"
+  end
+
   def display_lose_screen
     clear_display
     print "\n Sorry, you lose\n\n"
@@ -24,7 +36,7 @@ module Display
     display_guessed_letters
     print "\n The mystery word was:  "
     print mystery_word.join
-    print "\n"
+    print "\n\n"
   end
 
   def display_win_screen
@@ -37,7 +49,7 @@ module Display
 
   def display_guessed_letters
     print "\n Letters already guessed:"
-    guessed_letters.each {|i| print ' ', i, ' '}
+    guessed_letters.each { |i| print ' ', i, ' ' }
     print "\n"
   end
 
