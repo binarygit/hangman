@@ -47,9 +47,9 @@ module GameLogic
   end
 
   def check_win
-    if dash_row == mystery_word
+    if dash_row.join.delete(' ') == mystery_word.join
       display_win_screen
-      num_of_turns = 0
+      @turns_remaining = 0
     elsif turns_remaining == 0
       display_lose_screen
     end

@@ -17,16 +17,20 @@ module Display
     display_prompt_for_input
   end
 
+  def display_load_game_screen
+    clear_display
+    print " Load Game\n\n"
+    print " Your Saved Games:\n\n"
+    Dir.children('saved_games').each_with_index {|dir, index| print " #{index}) #{dir}\n"}
+    print "\n\n Enter a filename, to load game from: "
+  end
+
   def display_save_game_screen
     clear_display
     print " Save Game\n\n"
-    print " Your Saved Games:\n"
-    if Dir.empty?('saved_games') 
-      print " No saved Games"
-    else
-    Dir.children('saved_games').each_with_index {|dir, index| puts ' ', "#{index}) #{dir}"}
-    end
-    print " Enter a filename, to save your game in"
+    print " Your Saved Games:\n\n"
+    Dir.children('saved_games').each_with_index {|dir, index| print " #{index}) #{dir}\n"}
+    print "\n\n Enter a filename, to save your game in: "
   end
 
   def display_lose_screen

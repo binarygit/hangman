@@ -3,11 +3,13 @@ require 'pry-byebug'
 require_relative 'display.rb'
 require_relative 'game_logic'
 require_relative 'save_game'
+require_relative 'load_game'
 
 class Hangman
   include Display
   include GameLogic
   include SaveGame
+  include LoadGame
   attr_reader :turns_remaining, :mystery_word
   attr_reader :guessed_letters, :dash_row
 
