@@ -1,7 +1,6 @@
 #!/usr/bin/ruby
 
 module GameLogic
-
   def game_logic
     input = gets.chomp
     if valid?(input)

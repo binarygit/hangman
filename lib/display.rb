@@ -21,7 +21,7 @@ module Display
     clear_display
     print " Load Game\n\n"
     print " Your Saved Games:\n\n"
-    Dir.children('saved_games').each_with_index {|dir, index| print " #{index}) #{dir}\n"}
+    Dir.children('saved_games').each_with_index { |dir, index| print " #{index}) #{dir}\n" }
     print "\n\n Enter a filename, to load game from: "
   end
 
@@ -29,7 +29,7 @@ module Display
     clear_display
     print " Save Game\n\n"
     print " Your Saved Games:\n\n"
-    Dir.children('saved_games').each_with_index {|dir, index| print " #{index}) #{dir}\n"}
+    Dir.children('saved_games').each_with_index { |dir, index| print " #{index}) #{dir}\n" }
     print "\n\n Enter a filename, to save your game in: "
   end
 

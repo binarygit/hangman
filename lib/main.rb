@@ -34,6 +34,7 @@ class Hangman
     loop do
       mode = gets.chomp
       break if mode == '1'
+
       if mode == '2'
         if saved_games?
           return load_game
@@ -51,7 +52,6 @@ class Hangman
       game_logic
     end
   end
-
 end
 
 Hangman.new.open
