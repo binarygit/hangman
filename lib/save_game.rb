@@ -2,7 +2,7 @@
 
 module SaveGame
   def save_game
-    display_save_game_screen
+    display_screen('save_game')
     file_name = gets.chomp
     serialize(file_name)
   end
@@ -17,7 +17,6 @@ module SaveGame
     File.open(file_name, 'w') do |file|
       Marshal.dump(obj, file)
     end
-    @turns_remaining = 0
   end
 
   def saved_games?

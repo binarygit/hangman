@@ -2,7 +2,7 @@
 
 module LoadGame
   def load_game
-    display_load_game_screen
+    display_screen('load game')
     file_name = gets.chomp
     unserialize(file_name)
   end
