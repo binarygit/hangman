@@ -63,21 +63,35 @@ module Display
   end
 
   def display_lose_screen
-    clear_display
-    print "\n Sorry, you lose\n\n"
-    display_dash_row
-    display_guessed_letters
-    print "\n The mystery word was:  "
-    print mystery_word.join
-    print "\n\n"
+    display_verdict_screen
   end
 
   def display_win_screen
+    display_verdict_screen
+  end
+
+  def display_verdict_screen
     clear_display
-    print "\n Hurray, you have won\n\n"
+    print verdict
     display_dash_row
     display_guessed_letters
-    print "\n"
+    display_mystery_word if verdict == "\n Sorry, you lose\n\n"
+    print "\n\n"
+  end
+
+  def verdict
+    # find which method lose_screen or win_screen called the
+    # display verdict method
+    if caller_locations(1, 2)[1].label == 'display_lose_screen'
+      return "\n Sorry, you lose\n\n"
+    else
+      return "\n Hurray, you have won\n\n"
+    end
+  end
+
+  def display_mystery_word
+    print "\n The mystery word was:  "
+    print mystery_word.join
   end
 
   def clear_display
