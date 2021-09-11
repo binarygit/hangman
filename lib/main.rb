@@ -1,10 +1,11 @@
 #!/usr/bin/ruby
 require 'pry-byebug'
-require_relative 'display.rb'
+require_relative 'display'
 require_relative 'game_logic'
 require_relative 'save_game'
 require_relative 'load_game'
 
+# the game is Hangman!
 class Hangman
   include Display
   include GameLogic
@@ -21,7 +22,7 @@ class Hangman
   end
 
   def fetch_word
-    File.open('words.txt', 'r').readlines[rand(61000)].split('')[0..-2]
+    File.open('words.txt', 'r').readlines[rand(61_000)].split('')[0..-2]
   end
 
   def open
@@ -36,11 +37,9 @@ class Hangman
       break if mode == '1'
 
       if mode == '2'
-        if saved_games?
-          return load_game
-        else
-          print " sorry, there are no saved games to load from\n "
-        end
+        return load_game if saved_games?
+
+        print " sorry, there are no saved games to load from\n "
       end
     end
   end
